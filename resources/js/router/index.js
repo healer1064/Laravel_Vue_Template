@@ -3,30 +3,28 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Home from '../components/pages/home.vue';
+import CategoryCreate from '../components/pages/category/create.vue';
 import CategoryList from '../components/pages/category/index.vue';
-import CreateCategory from '../components/pages/category/create.vue';
 
 // Register route array
 const routes = new VueRouter({
-    mode: 'history',
+    mode: "history",
     routes: [
         {
-            path: '/',
+            path: "/",
             component: Home,
-            name: 'home',
+            name: "home"
         },
         {
-            path: '/category',
+            path: "/category/create",
+            component: CategoryCreate,
+            name: "category-create"
+        },
+        {
+            path: "/category/list",
             component: CategoryList,
-            name: 'categoryList',
+            name: "category-list"
         },
-        {
-            path: '/category/create',
-            component: CreateCategory,
-            name: 'create-category',
-        },
-
     ]
-
-})
+});
 export default routes

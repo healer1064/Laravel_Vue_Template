@@ -1922,6 +1922,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -37733,7 +37735,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "router-link",
-            { staticClass: "p-2 text-dark", attrs: { to: "category" } },
+            { staticClass: "p-2 text-dark", attrs: { to: "category-list" } },
             [_vm._v("Categories")]
           )
         ],
@@ -37822,7 +37824,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "btn btn-success float-right",
-                  attrs: { to: "create-category" }
+                  attrs: { to: "category-create" }
                 },
                 [_vm._v("Add Category")]
               )
@@ -53658,8 +53660,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_pages_home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/home.vue */ "./resources/js/components/pages/home.vue");
-/* harmony import */ var _components_pages_category_index_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/pages/category/index.vue */ "./resources/js/components/pages/category/index.vue");
-/* harmony import */ var _components_pages_category_create_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/category/create.vue */ "./resources/js/components/pages/category/create.vue");
+/* harmony import */ var _components_pages_category_create_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/pages/category/create.vue */ "./resources/js/components/pages/category/create.vue");
+/* harmony import */ var _components_pages_category_index_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/category/index.vue */ "./resources/js/components/pages/category/index.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -53668,19 +53670,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  // Register route array
 
 var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: 'history',
+  mode: "history",
   routes: [{
-    path: '/',
+    path: "/",
     component: _components_pages_home_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    name: 'home'
+    name: "home"
   }, {
-    path: '/category',
-    component: _components_pages_category_index_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    name: 'categoryList'
+    path: "/category/create",
+    component: _components_pages_category_create_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    name: "category-create"
   }, {
-    path: '/category/create',
-    component: _components_pages_category_create_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    name: 'create-category'
+    path: "/category/list",
+    component: _components_pages_category_index_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    name: "category-list"
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (routes);

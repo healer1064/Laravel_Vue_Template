@@ -6,7 +6,7 @@
           <div class="card-header">
             Category Component
             <router-link
-              to="create-category"
+              to="category-create"
               class="btn btn-success float-right"
               >Add Category</router-link
             >
