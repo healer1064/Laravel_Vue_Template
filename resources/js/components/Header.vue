@@ -7,8 +7,7 @@
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <router-link class="p-2 text-dark" to="home">Home</router-link>
-      <a class="p-2 text-dark" href="#">About</a>
-      <a class="p-2 text-dark" href="#">Blogs</a>
+      <router-link class="p-2 text-dark" to="category">Categories</router-link>
     </nav>
   </div>
 </template>
