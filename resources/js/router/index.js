@@ -2,29 +2,23 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import Home from '../components/pages/home.vue';
-import CategoryCreate from '../components/pages/category/create.vue';
-import CategoryList from '../components/pages/category/index.vue';
-
+import Home from '../pages/Home.vue';
+import CategoryList from '../pages/category/Index.vue';
 // Register route array
 const routes = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/",
+            path: '/',
             component: Home,
-            name: "home"
+            name: 'home',
         },
         {
-            path: "/category/create",
-            component: CategoryCreate,
-            name: "category-create"
-        },
-        {
-            path: "/category/list",
+            path: '/category',
             component: CategoryList,
-            name: "category-list"
+            name: 'category-list',
         },
     ]
 });
+
 export default routes
