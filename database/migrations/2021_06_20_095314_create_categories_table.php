@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
+            $table->tinyInteger('status')->default(1)->comment('1 = Active and 2 = In Active');
             $table->timestamps();
         });
     }

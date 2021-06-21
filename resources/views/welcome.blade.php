@@ -11,10 +11,11 @@
 
 <body>
     <div id="app">
-        <app-header />
-        <router-view />
-        
+        <app-header></app-header>
+        <router-view></router-view>
+        <app-footer></app-footer>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
+
 </html>
