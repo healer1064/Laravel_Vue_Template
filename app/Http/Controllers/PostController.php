@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all()->toArray();
-        return array_reverse($posts);
+        return response()->json($posts, 200);
     }
  
     // add post
@@ -19,13 +19,15 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
+            'description' => 'required',
+            
         ]);
 
-        $$post = Post::create([
-            'title' => $request->name,
+        $post = Post::create([
+            'title' => $request->title,
             'description' =>  $request->description,
         ]);
-        return response()->json($$post, 200);
+        return response()->json($post, 200);
     }
  
     // edit post

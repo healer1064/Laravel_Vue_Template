@@ -7,7 +7,7 @@
             <div class="card-header">Post Form</div>
             <div class="card-body">
               <form
-                @submit.prevent="createPost()"
+                @submit.prevent="updatePost()"
                 @keydown="postForm.onKeydown($event)"
               >
                 <div class="form-group">
@@ -30,9 +30,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="description"
-                    >Description</label
-                  >
+                  <label for="description">Description</label>
                   <textarea
                     class="form-control"
                     id="description"
@@ -62,17 +60,21 @@
 export default {
   data() {
     return {
-      //input form name or any name but v-model will same
       postForm: new Form({
         title: "",
         description: "",
       }),
+      //post: {},
     };
   },
+
   methods: {
     createPost() {
       this.postForm
-        .post("/api/post/add", { name: this.title, description: this.description })
+        .post("/api/post/add", {
+          name: this.title,
+          description: this.description,
+        })
         .then(() => {
           this.postForm.title = "";
           this.postForm.description = "";
@@ -88,6 +90,20 @@ export default {
           });
         });
     },
+    loadPost() {
+      let db_post_id = this.$route.params.id;
+      axios.get(`api/post/edit/${db_post_id}`).then((response) => {
+        this.postForm.title = response.data.title;
+        this.postForm.description = response.data.description;
+        //console.log(response);
+      });
+    },
+    updatePost() {
+
+    },
+  },
+  mounted() {
+    this.loadPost();
   },
 };
 </script>

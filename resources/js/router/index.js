@@ -9,6 +9,8 @@ import CategoryEdit from "../pages/category/edit.vue";
 
 import PostList from "../pages/post/Index.vue";
 import PostCreate from "../pages/post/Create.vue";
+import PostEdit from "../pages/post/Edit.vue";
+
 
 // Register route array
 const routes = new VueRouter({
@@ -21,6 +23,7 @@ const routes = new VueRouter({
         //Post
         { path: "/post-list", component: PostList },
         { path: "/post-create", component: PostCreate },
+        { path: "/post-edit", component: PostEdit, name: 'post-edit' },
     ]
 });
 
