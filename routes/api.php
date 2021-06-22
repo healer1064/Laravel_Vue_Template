@@ -19,3 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('category', 'CategoryController');
+
+Route::group(['prefix' => 'post'], function () {
+    Route::get('post', 'PostController@index');
+    Route::post('add', 'PostController@add');
+    Route::get('edit/{id}', 'PostController@edit');
+    Route::post('update/{id}', 'PostController@update');
+    Route::delete('delete/{id}', 'PostController@delete');
+});

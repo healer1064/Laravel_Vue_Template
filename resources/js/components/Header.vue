@@ -5,6 +5,7 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <router-link class="p-2 text-dark" to="/">Home</router-link>
         <router-link class="p-2 text-dark" to="/category-list">Categories</router-link>
+        <router-link class="p-2 text-dark" to="/post-list">Blog</router-link>
       </nav>
       
     </div>

@@ -65,9 +65,16 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
-    {
-        //
+    public function edit($id)
+    {   //dd($category);
+        $category = Category::findOrFail($id);
+        
+        if ($category) {
+            return response()->json($category, 200);
+        } else {
+            return response()->json('failed', 404);
+        }
+        
     }
 
     /**
