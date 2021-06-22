@@ -61,16 +61,22 @@ export default {
                 .post("/api/category", { name: this.name })
                 .then(() => {
                     this.categoryForm.name = "";
-                    toast.fire({
-                        icon: "success",
-                        title: "Category created successfully"
-                    });
+                    // toast.fire({
+                    //     icon: "success",
+                    //     title: "Category created successfully"
+                    // });
+                    this.$toast.success({
+                        title:'Success',
+                        message:'Category created successfully'
+                    })
+
+
                 })
                 .catch(err => {
-                    toast.fire({
-                        icon: "error",
-                        title: "Category not created successfully"
-                    });
+                    this.$toast.success({
+                        title:'Error',
+                        message:'Category not created successfully'
+                    })
                 });
         }
     }
