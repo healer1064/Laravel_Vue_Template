@@ -3,6 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import Vue from 'vue';
 import routes from './router/index';
+//import Form from 'vform'
 
 Vue.component('app-header', require('./components/Header.vue').default);
 Vue.component('home', require('./pages/home.vue').default);

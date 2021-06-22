@@ -6,26 +6,22 @@
                     <div class="card mt-2">
                         <div class="card-header">
                             Category Form
-
                         </div>
                         <div class="card-body">
-
-                            <form @submit.prevent="createCategory()">
-
+                            <form @submit.prevent="createCategory()" @keydown="categoryForm.onKeydown($event)">
                                 <div class="form-group">
-                                    <label for="categorytitle"
-                                        >Category name</label
-                                    >
+                                    <label for="categorytitle">Category name</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="name"
                                         name="name"
-                                        v-model="categoryName"
+                                        v-model="categoryForm.name"
                                         placeholder="Category name"
                                     />
-                                </div>
-                                <button class="btn btn-primary">Save</button>
+                            <div class="text-danger" v-if="categoryForm.errors.has('name')" v-html="categoryForm.errors.get('name')" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>
                     </div>
@@ -34,23 +30,27 @@
         </div>
     </div>
 </template>
-
 <script>
+import Form from 'vform'
 export default {
     data(){
         return{
             //input form name or any name but v-model will same
-            categoryName: '',
+             categoryForm: new Form({
+                 name: '',
+            })
         }
     },
     methods:{
         createCategory(){
-            axios.post('/api/category',{name: this.categoryName}).then((response)=>{
+            // axios.post('/api/category',{name: this.name}).then((response)=>{
+            //     console.log(response);
+            // })
+            this.categoryForm.post('/api/category',{name: this.name}).then((response)=>{
                 console.log(response);
             })
         }
     }
 };
 </script>
-
 <style></style>
