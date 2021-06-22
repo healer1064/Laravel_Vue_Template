@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="offset-md-1 col-md-10  offset-md-1">
-                    <div class="card mt-2">
+                    <div class="card">
                         <div class="card-header">
                             Featured
                             <router-link to="/create-category" class="float-right btn btn-primary">Add New Category</router-link>
