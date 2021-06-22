@@ -6,38 +6,33 @@
                     <div class="card">
                         <div class="card-header">
                             Featured
-                            <router-link to="/create-category" class="float-right btn btn-primary">Add New Category</router-link>
+                            <router-link
+                                to="/create-category"
+                                class="float-right btn btn-primary"
+                                > Add New Category</router-link
+                            >
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
+                            <h5 class="card-title">Categories</h5>
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Category name</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                    <tr v-for="(category, index) in categories"
+                                        :key="category.id">
+                                        <th scope="row">{{ ++index  }}</th>
+                                        <td>{{ category.name }}</td>
+
+                                        <td>
+                                            <a href="">Edit</a> / <a href="">Delete</a>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -49,7 +44,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            categories: [],
+        };
+    },
+    methods: {
+        //Show categories
+            loadCategories() {
+            axios.get('/api/category').then(response => {
+                this.categories = response.data;
+            });
+        }
+    },
+    mounted() {
+        this.loadCategories();
+    }
+};
 </script>
 
 <style lang="scss" scoped></style>
