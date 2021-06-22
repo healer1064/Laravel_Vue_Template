@@ -7,7 +7,7 @@
                         <div class="card-header">
                             Featured
                             <router-link
-                                to="/create-category"
+                                to="/category-create"
                                 class="float-right btn btn-primary"
                                 > Add New Category</router-link
                             >
@@ -19,6 +19,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Category name</th>
+                                        <th scope="col">Slug</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -27,9 +28,12 @@
                                         :key="category.id">
                                         <th scope="row">{{ ++index  }}</th>
                                         <td>{{ category.name }}</td>
+                                        <td>{{ category.slug }}</td>
 
                                         <td>
-                                            <a href="">Edit</a> / <a href="">Delete</a>
+                                        <router-link :to="{name:'category-edit', params: {slug:category.slug}}">Edit</router-link> /
+
+                                            <a href="">Delete</a>
                                         </td>
                                     </tr>
 

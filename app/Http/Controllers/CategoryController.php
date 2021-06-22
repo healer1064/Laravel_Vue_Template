@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' =>  Str::slug($request->name),
         ]);
-        return response()->json('success', 200);
+        return response()->json($category, 200);
     }
 
     /**
