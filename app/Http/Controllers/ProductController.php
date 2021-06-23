@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all()->toArray();
+        return response()->json($products, 200);
     }
 
     /**
@@ -35,7 +36,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate(['title'=>'required|unique:products|max:255','price'=>'required|numeric','description'=>'required'
+        ]);
+
+        $product = Product::create(['title'=>$request->title,'price'=>$request->price,'description'=>$request->description]);
+        return response()->json('success', 200);
+
     }
 
     /**

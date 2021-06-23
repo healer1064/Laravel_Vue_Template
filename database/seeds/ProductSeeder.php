@@ -1,5 +1,7 @@
 <?php
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+
 class ProductSeeder extends Seeder
 {
     /**
@@ -15,9 +17,10 @@ class ProductSeeder extends Seeder
                 'description' => 'description',
                 'image' => 'default.png',
                 'slug' => 'slug',
+                'price' => 150.00,
                 'status' => 1
             ]
         ];
-        Post::insert($productRecord);
+        Product::insert($productRecord);
     }
 }

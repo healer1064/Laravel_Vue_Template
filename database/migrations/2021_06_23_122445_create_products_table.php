@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title')->unique();
             $table->text('description');
             $table->text('image')->nullable();
+            $table->decimal('price', 10, 2);
             $table->string('slug');
             $table->tinyInteger('status')->default(1)->comment('0 = In Active / 1 = Active');
             $table->timestamps();
