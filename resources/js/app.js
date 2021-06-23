@@ -28,7 +28,7 @@ const toast = Swal.mixin({
   });
 
 window.toast = toast;
-
+window.Fire =  new Vue();
 Vue.component('app-header', require('./components/Header.vue').default);
 Vue.component('home', require('./pages/home.vue').default);
 Vue.component('category-list', require('./pages/category/index.vue').default);

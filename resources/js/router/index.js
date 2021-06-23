@@ -21,7 +21,7 @@ const routes = new VueRouter({
         { path: "/category-list", component: CategoryList },
         { path: "/category/edit/:slug", component: CategoryEdit, name: 'category-edit'},
         //Post
-        { path: "/post-list", component: PostList },
+        { path: "/post-list", component: PostList, name: 'post-list' },
         { path: "/post-create", component: PostCreate },
         { path: "/post-edit", component: PostEdit, name: 'post-edit' },
     ]

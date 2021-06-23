@@ -25,5 +25,5 @@ Route::group(['prefix' => 'post'], function () {
     Route::post('add', 'PostController@add');
     Route::get('edit/{id}', 'PostController@edit');
     Route::post('update/{id}', 'PostController@update');
-    Route::delete('delete/{id}', 'PostController@delete');
+    Route::post('/delete/{id}', 'PostController@delete');
 });

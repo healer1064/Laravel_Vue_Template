@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     {
         $categoryRecord = [
             [
-                'title' => 'Electronic',
+                'name' => 'Electronic',
                 'slug' => 'electronic'
             ]
         ];

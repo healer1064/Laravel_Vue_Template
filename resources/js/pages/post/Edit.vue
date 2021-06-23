@@ -47,7 +47,7 @@
                     v-html="postForm.errors.get('description')"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Update Post</button>
               </form>
             </div>
           </div>
@@ -69,27 +69,7 @@ export default {
   },
 
   methods: {
-    createPost() {
-      this.postForm
-        .post("/api/post/add", {
-          name: this.title,
-          description: this.description,
-        })
-        .then(() => {
-          this.postForm.title = "";
-          this.postForm.description = "";
-          this.$toast.success({
-            title: "Success",
-            message: "Post created successfully!",
-          });
-        })
-        .catch((err) => {
-          this.$toast.success({
-            title: "Error",
-            message: "Post not created!",
-          });
-        });
-    },
+
     loadPost() {
       let db_post_id = this.$route.params.id;
       axios.get(`api/post/edit/${db_post_id}`).then((response) => {
@@ -99,8 +79,16 @@ export default {
       });
     },
     updatePost() {
-
-    },
+        let db_post_id = this.$route.params.id;
+        this.postForm.post(`/api/post/update/${db_post_id}`)
+            .then(() => {
+                this.$toast.success({
+                    title: "Success",
+                    message: "Post updated successfully!",
+                  });
+                this.$router.push({name: 'post-list'});
+            });
+    }
   },
   mounted() {
     this.loadPost();

@@ -26,10 +26,12 @@
                 <td>
                   <router-link
                     :to="{ name: 'post-edit', params: { id: post.id } }"
-                    >Edit
+                    class="btn btn-success btn-sm">Edit
                   </router-link>
-                  /
-                  <router-link to="">Delete</router-link>
+
+
+                  <button class="btn btn-danger btn-sm" @click="deletePost(post.id)">Delete</button>
+
                 </td>
               </tr>
             </tbody>
@@ -50,13 +52,52 @@ export default {
   methods: {
     //Show categories
     loadPosts() {
-      axios.get("/api/post/list").then((response) => {
+        axios.get("/api/post/list").then((response) => {
         this.posts = response.data;
       });
     },
+    deletePost(id) {
+        // axios.post(`/api/post/delete/${id}`)
+        //     .then(response => {
+        //         let i = this.posts.map(item => item.id).indexOf(id); // find index of your object
+        //         this.posts.splice(i, 1)
+        //     });
+         Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(result => {
+            if (result.isConfirmed) {
+                    axios.post(`/api/post/delete/${id}`)
+                    .then(() => {
+                        Swal.fire(
+                            "Deleted!",
+                            "Your file has been deleted.",
+                            "success"
+                        );
+                        Fire.$emit("AfterCreate");
+                    })
+
+                    .catch(() => {
+                        Swal(
+                            "Failed",
+                            "There was something wrong",
+                            "warning"
+                        );
+                    });
+            }
+        });
+    }
   },
   mounted() {
     this.loadPosts();
+    Fire.$on("AfterCreate", () => {
+        this.loadPosts();
+    });
   },
 };
 </script>

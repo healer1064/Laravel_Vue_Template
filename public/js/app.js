@@ -2370,37 +2370,30 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    createPost: function createPost() {
-      var _this = this;
-
-      this.postForm.post("/api/post/add", {
-        name: this.title,
-        description: this.description
-      }).then(function () {
-        _this.postForm.title = "";
-        _this.postForm.description = "";
-
-        _this.$toast.success({
-          title: "Success",
-          message: "Post created successfully!"
-        });
-      })["catch"](function (err) {
-        _this.$toast.success({
-          title: "Error",
-          message: "Post not created!"
-        });
-      });
-    },
     loadPost: function loadPost() {
-      var _this2 = this;
+      var _this = this;
 
       var db_post_id = this.$route.params.id;
       axios.get("api/post/edit/".concat(db_post_id)).then(function (response) {
-        _this2.postForm.title = response.data.title;
-        _this2.postForm.description = response.data.description; //console.log(response);
+        _this.postForm.title = response.data.title;
+        _this.postForm.description = response.data.description; //console.log(response);
       });
     },
-    updatePost: function updatePost() {}
+    updatePost: function updatePost() {
+      var _this2 = this;
+
+      var db_post_id = this.$route.params.id;
+      this.postForm.post("/api/post/update/".concat(db_post_id)).then(function () {
+        _this2.$toast.success({
+          title: "Success",
+          message: "Post updated successfully!"
+        });
+
+        _this2.$router.push({
+          name: 'post-list'
+        });
+      });
+    }
   },
   mounted: function mounted() {
     this.loadPost();
@@ -2462,6 +2455,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2476,10 +2471,40 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/post/list").then(function (response) {
         _this.posts = response.data;
       });
+    },
+    deletePost: function deletePost(id) {
+      // axios.post(`/api/post/delete/${id}`)
+      //     .then(response => {
+      //         let i = this.posts.map(item => item.id).indexOf(id); // find index of your object
+      //         this.posts.splice(i, 1)
+      //     });
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.post("/api/post/delete/".concat(id)).then(function () {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Fire.$emit("AfterCreate");
+          })["catch"](function () {
+            Swal("Failed", "There was something wrong", "warning");
+          });
+        }
+      });
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
     this.loadPosts();
+    Fire.$on("AfterCreate", function () {
+      _this2.loadPosts();
+    });
   }
 });
 
@@ -2528,6 +2553,7 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().mixin({
   timer: 3000
 });
 window.toast = toast;
+window.Fire = new vue__WEBPACK_IMPORTED_MODULE_4__.default();
 vue__WEBPACK_IMPORTED_MODULE_4__.default.component('app-header', __webpack_require__(/*! ./components/Header.vue */ "./resources/js/components/Header.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_4__.default.component('home', __webpack_require__(/*! ./pages/home.vue */ "./resources/js/pages/home.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_4__.default.component('category-list', __webpack_require__(/*! ./pages/category/index.vue */ "./resources/js/pages/category/index.vue").default);
@@ -2631,7 +2657,8 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
   }, //Post
   {
     path: "/post-list",
-    component: _pages_post_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default
+    component: _pages_post_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    name: 'post-list'
   }, {
     path: "/post-create",
     component: _pages_post_Create_vue__WEBPACK_IMPORTED_MODULE_7__.default
@@ -42921,7 +42948,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("Save")]
+                    [_vm._v("Update Post")]
                   )
                 ]
               )
@@ -42992,16 +43019,26 @@ var render = function() {
                         _c(
                           "router-link",
                           {
+                            staticClass: "btn btn-success btn-sm",
                             attrs: {
                               to: { name: "post-edit", params: { id: post.id } }
                             }
                           },
                           [_vm._v("Edit\n                ")]
                         ),
-                        _vm._v("\n                /\n                "),
-                        _c("router-link", { attrs: { to: "" } }, [
-                          _vm._v("Delete")
-                        ])
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.deletePost(post.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Delete")]
+                        )
                       ],
                       1
                     )
